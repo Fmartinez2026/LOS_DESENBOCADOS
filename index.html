@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecorutas La Araucanía - Los Desenvocados</title>
+    <!-- Enlace a la hoja de estilos "visualizadora" -->
+    <link rel="stylesheet" href="06_starter.css">
+</head>
+<body>
+
+    <!-- Encabezado superior con Flexbox -->
+    <header role="banner">
+        <div class="logo">
+            <small>ECORUTAS · LA ARAUCANÍA</small><br>
+            <strong>Los Desenvocados</strong>
+        </div>
+        
+        <!-- Navegación principal -->
+        <nav role="navigation" aria-label="Menú principal">
+            <ul>
+                <li><a href="#">Rutas</a></li>
+                <li><a href="#">Negocios</a></li>
+                <li><a href="#">Comunidad</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+        
+        <a href="#" role="button">Ingresar</a>
+    </header>
+
+    <!-- Contenedor principal: El CSS lo divide en 3 columnas (1fr 1fr 260px) -->
+    <main role="main">
+        
+        <!-- Columna 1 (1fr): Textos principales del Hero -->
+        <article aria-labelledby="hero-titulo">
+            <span aria-label="Rutas activas">🔴 42 rutas activas</span>
+            <p>REGIÓN DE LA ARAUCANÍA · CHILE</p>
+            <h1 id="hero-titulo">Descubre la naturaleza salvaje del sur</h1>
+            <p>Conectamos negocios locales con viajeros que buscan experiencias auténticas en bosques, volcanes y lagos de la Araucanía.</p>
+        </article>
+
+        <!-- Columna 2 (1fr): Espacio para la imagen del volcán -->
+        <section aria-label="Fotografía del paisaje">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXQ9xICsdJCOWvisWMd3PDanw4maJxFqE7q8E02kBHxA&s=10" alt="Volcán nevado y río en la Araucanía">
+        </section>
+
+        <!-- Columna 3 (260px): Panel derecho de acciones -->
+        <aside role="complementary" aria-labelledby="titulo-acciones">
+            <h2 id="titulo-acciones">¿QUÉ DESEAS HACER?</h2>
+            <ul>
+                <li>
+                    <a href="#">
+                        <strong>Publicar Anuncio</strong><br>
+                        <span>Comparte tu ecoruta</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <strong>Otros</strong><br>
+                        <span>Más opciones</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <strong>Ver Rutas</strong><br>
+                        <span>Explora La Araucanía</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <strong>Ajustes</strong><br>
+                        <span>Configuración</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <strong>Login</strong><br>
+                        <span>Ingresa a tu cuenta</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <strong>Negocios</strong><br>
+                        <span>Gestiona tu negocio</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer role="contentinfo">
+        <p>&copy; 2026 Los Desenvocados · La Araucanía, Chile<br>Turismo sostenible y ecorutas</p>
+    </footer>
+
+</body>
+</html>
