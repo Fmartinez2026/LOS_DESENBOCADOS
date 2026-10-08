@@ -1,173 +1,393 @@
 /* ============================================================
-   starter.css — Desarrollo de Frontend (ICINF1107) · Semana 3
-   Hoja de estilos "visualizadora".
-
-   Los equipos SOLO enlazan este archivo (no lo escriben ni lo
-   modifican hoy): <link rel="stylesheet" href="starter.css">
-
-   Qué hace:
-   1) Un reset básico y tipografía por defecto, para que la página
-      se vea ordenada desde el primer momento.
-   2) Un borde de color distinto y una etiqueta con el nombre de
-      cada elemento semántico (header, nav, main, section, article,
-      aside, footer), para que la estructura HTML se vuelva visible
-      sin escribir una sola línea de CSS.
-   3) Un estilo genérico para los bloques ".blank" del esqueleto de
-      la mini-clase: mientras sean <div class="blank">, se ven como
-      una caja gris pendiente; en cuanto se reemplazan por la
-      etiqueta semántica correcta, toman el color que les
-      corresponde más abajo.
-
-   No es necesario entender cada línea hoy — a partir de la semana 4
-   (CSS moderno y responsivo) se explica en profundidad.
+   VARIABLES Y CONFIGURACIÓN BASE
    ============================================================ */
-
-/* ---------- 1) Reset básico y tipografía ---------- */
+:root {
+    --bg-dark: #070f0a;
+    --bg-panel: #0b1710;
+    --bg-card: rgba(19, 38, 26, 0.6);
+    --border-color: rgba(26, 51, 35, 0.8);
+    
+    --primary: #d85c27; /* Terracota */
+    --primary-hover: #b84618;
+    --accent: #2e563c; /* Verde bosque */
+    
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+    
+    --font-sans: 'Inter', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+}
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  padding: 24px;
-  background: #F7F8FC;
-  color: #131a3e;
-  font-family: Calibri, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-h1, h2, h3 {
-  font-family: Cambria, 'Times New Roman', serif;
-  color: #c60e7f;
-  margin: 0 0 8px 0;
-  line-height: 1.25;
+/* ============================================================
+   NAVEGACIÓN (FLEXBOX)
+   ============================================================ */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11, 23, 16, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    height: 80px;
 }
 
-h1 { font-size: 1.8rem; }
-h2 { font-size: 1.25rem; }
-
-p {
-  margin: 0 0 8px 0;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: opacity 0.3s ease;
 }
 
-img {
-  max-width: 100%;
-  display: block;
-  border-radius: 4px;
+.brand:hover {
+    opacity: 0.8;
 }
 
-a {
-  color: #1E2761;
-  text-decoration: none;
-  font-weight: 600;
-}
-a:hover {
-  text-decoration: underline;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-li {
-  padding: 4px 0;
-  border-bottom: 1px solid #E3E7F2;
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary);
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
 }
 
-.logo {
-  font-family: Cambria, 'Times New Roman', serif;
-  font-weight: bold;
-  font-size: 1.3rem;
-  color: #1E2761;
+.brand:hover .logo-icon {
+    transform: scale(1.1) rotate(5deg);
 }
 
-/* ---------- 2) Bloques pendientes del esqueleto (mini-clase) ---------- */
-
-.blank {
-  position: relative;
-  border: 3px dashed #C9CDDC;
-  border-radius: 6px;
-  margin: 14px 0;
-  padding: 22px 16px 16px 16px;
-  background: #FFFFFF;
-}
-.blank::before {
-  content: "PENDIENTE #" attr(data-n);
-  position: absolute;
-  top: -13px;
-  left: 12px;
-  background: #C9CDDC;
-  color: #3A3F55;
-  font: 700 11px/1 'Courier New', monospace;
-  padding: 3px 8px;
-  border-radius: 3px;
-  letter-spacing: 0.5px;
+.brand-text small {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--primary);
+    letter-spacing: 0.1em;
 }
 
-/* ---------- 3) Un borde y una etiqueta por elemento semántico ---------- */
-
-header, nav, main, section, article, aside, footer {
-  position: relative;
-  display: block;
-  border: 3px solid var(--tag-color, #9AA0B4);
-  border-radius: 6px;
-  margin: 14px 0;
-  padding: 22px 16px 16px 16px;
-  background: #FFFFFF;
+.brand-text strong {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
 }
 
-header  { --tag-color: #1E2761; }
-nav     { --tag-color: #F9A826; }
-section { --tag-color: #0E7C7B; }
-main    { --tag-color: #8A8FB0; }
-article { --tag-color: #2F6FED; }
-aside   { --tag-color: #C2489C; }
-footer  { --tag-color: #5A5A6E; }
-
-header::before, nav::before, main::before, section::before,
-article::before, aside::before, footer::before {
-  position: absolute;
-  top: -13px;
-  left: 12px;
-  color: #FFFFFF;
-  background: var(--tag-color);
-  font: 700 11px/1 'Courier New', monospace;
-  padding: 3px 8px;
-  border-radius: 3px;
-  letter-spacing: 0.5px;
+.nav-links {
+    display: flex;
+    gap: 2rem;
 }
 
-header::before  { content: "header"; }
-nav::before     { content: "nav"; }
-section::before { content: "section"; }
-main::before    { content: "main"; }
-article::before { content: "article"; }
-aside::before   { content: "aside"; }
-footer::before  { content: "footer"; }
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
 
-/* ---------- Layout puntual solo para que la vista genérica se lea bien ---------- */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s ease;
+}
 
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
+.nav-links a:hover {
+    color: var(--text-main);
 }
-nav {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  align-items: center;
+
+.nav-links a:hover::after {
+    width: 100%;
 }
-main {
-  display: grid;
-  grid-template-columns: 1fr 1fr 260px;
-  gap: 16px;
+
+/* ============================================================
+   BOTONES
+   ============================================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
 }
-@media (max-width: 820px) {
-  main { grid-template-columns: 1fr; }
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(216, 92, 39, 0.2);
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(216, 92, 39, 0.4);
+}
+
+.btn-icon gap {
+    gap: 0.5rem;
+}
+
+.btn-icon i {
+    transition: transform 0.3s ease;
+}
+
+.btn-icon:hover i {
+    transform: rotate(45deg);
+}
+
+/* ============================================================
+   LAYOUT PRINCIPAL (CSS GRID)
+   ============================================================ */
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.hero-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+/* ============================================================
+   HERO CARD (IZQUIERDA)
+   ============================================================ */
+.hero-card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    min-height: 520px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://d6myp1633h7qr.cloudfront.net/products/d7b4d419-7ba8-4f81-83ae-29525ec5083e_desktop.webp');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.6);
+    transition: transform 10s ease, filter 0.5s ease;
+    z-index: 1;
+}
+
+.hero-card:hover .hero-bg {
+    transform: scale(1.05);
+    filter: brightness(0.4);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(11,23,16,0.2) 0%, rgba(11,23,16,0.8) 100%);
+}
+
+.badge {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(7, 15, 10, 0.8);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    backdrop-filter: blur(5px);
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary);
+    border-radius: 50%;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(216, 92, 39, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(216, 92, 39, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(216, 92, 39, 0); }
+}
+.pulse { animation: pulse 2s infinite; }
+
+.hero-text {
+    max-width: 600px;
+    transform: translateY(0);
+    transition: transform 0.5s ease;
+}
+
+.hero-card:hover .hero-text {
+    transform: translateX(10px);
+}
+
+.subtitle {
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+}
+
+.hero-text h1 {
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.hero-text i {
+    color: var(--primary);
+}
+
+.description {
+    font-size: 1.1rem;
+    color: #d1d5db;
+    margin-bottom: 2rem;
+}
+
+/* ============================================================
+   SIDEBAR & ACCIONES (DERECHA)
+   ============================================================ */
+.sidebar {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    font-size: 0.8rem;
+    color: var(--primary);
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+}
+
+.action-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.action-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: all 0.3s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+    background: var(--border-color);
+    border-color: var(--text-muted);
+}
+
+.action-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.action-card:hover .action-icon {
+    transform: scale(1.2);
+}
+
+.action-info strong {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+}
+
+.action-info span {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.highlight strong { color: var(--primary); }
+.highlight-alt strong { color: #10b981; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-panel);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.eco-text {
+    color: #10b981;
+    margin-top: 0.5rem;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (MÓVILES)
+   ============================================================ */
+@media (max-width: 992px) {
+    .hero-layout {
+        grid-template-columns: 1fr;
+    }
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+    .nav-links {
+        display: none; /* Ocultar menú en móvil para simplificar */
+    }
 }
