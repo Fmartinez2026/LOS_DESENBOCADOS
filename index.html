@@ -1,118 +1,181 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecorutas La Araucanía - Los Desenvocados</title>
-    <!-- Enlace a la hoja de estilos "visualizadora" -->
+    
+    <!-- Enlace a la hoja de estilos "visualizadora" (Intacta) -->
     <link rel="stylesheet" href="06_starter.css">
-</head>
-<body>
+    
+    <!-- Tailwind CSS (Diseño moderno) -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Encabezado superior con Flexbox -->
-    <header role="banner">
-        <div class="logo">
-            <small>ECORUTAS · LA ARAUCANÍA</small><br>
-            <strong>Los Desenvocados</strong>
-        </div>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        forest: {
+                            950: '#070f0a', 900: '#0b1710', 850: '#102016', 
+                            800: '#13261a', 700: '#1a3323', 600: '#23442f', 500: '#2e563c'
+                        },
+                        terracotta: {
+                            400: '#f27238', 500: '#e06830', 600: '#d85c27', 700: '#b84618'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0b1710; }
+        ::-webkit-scrollbar-thumb { background: #1a3323; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d85c27; }
         
-        <!-- Navegación principal -->
-        <nav role="navigation" aria-label="Menú principal">
-            <ul>
-                <li><a href="#">Rutas</a></li>
-                <li><a href="#">Negocios</a></li>
-                <li><a href="#">Comunidad</a></li>
-                <li><a href="#">Contacto</a></li>
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(11, 23, 16, 0.4) 0%, rgba(11, 23, 16, 0.85) 75%, #0b1710 100%);
+        }
+        
+        /* Ajuste para los bordes del starter.css */
+        header, nav, main, section, article, aside, footer {
+            margin: 0 !important;
+        }
+        main {
+            display: flex !important;
+            flex-direction: column !important;
+        }
+    </style>
+</head>
+<body class="bg-[#0b1710] text-gray-100 font-sans min-h-screen flex flex-col antialiased" style="background-image: none;">
+
+    <!-- ENCABEZADO Y NAVEGACIÓN -->
+    <header class="sticky top-0 z-40 bg-[#0b1710]/90 backdrop-blur-md border-b border-forest-700/50 flex items-center justify-between px-4 sm:px-8 h-20" role="banner">
+        <a href="#" class="flex items-center gap-3 group logo !text-white hover:opacity-80 transition-opacity">
+            <div class="w-10 h-10 rounded-xl bg-forest-800 border border-forest-600/60 flex items-center justify-center text-terracotta-500 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                <i class="fa-solid fa-tree text-xl text-emerald-500"></i>
+            </div>
+            <div>
+                <small class="text-[10px] tracking-widest font-semibold uppercase text-terracotta-500 block">ECORUTAS · LA ARAUCANÍA</small>
+                <strong class="font-serif text-xl sm:text-2xl font-bold text-white tracking-wide">Los Desenvocados</strong>
+            </div>
+        </a>
+
+        <nav role="navigation" aria-label="Menú principal" class="hidden md:flex items-center gap-8 font-medium text-sm !bg-transparent !border-none !p-0">
+            <ul class="flex gap-8 !border-none">
+                <li class="!border-none !p-0"><a href="#rutas" class="relative pb-1 !text-gray-300 hover:!text-white !font-normal after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-terracotta-400 after:transition-all hover:after:w-full">Rutas</a></li>
+                <li class="!border-none !p-0"><a href="#negocios" class="relative pb-1 !text-gray-300 hover:!text-white !font-normal after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-terracotta-400 after:transition-all hover:after:w-full">Negocios</a></li>
+                <li class="!border-none !p-0"><a href="#comunidad" class="relative pb-1 !text-gray-300 hover:!text-white !font-normal after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-terracotta-400 after:transition-all hover:after:w-full">Comunidad</a></li>
+                <li class="!border-none !p-0"><a href="#contacto" class="relative pb-1 !text-gray-300 hover:!text-white !font-normal after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-terracotta-400 after:transition-all hover:after:w-full">Contacto</a></li>
             </ul>
         </nav>
-        
-        <a href="#" role="button">Acceder</a>
+
+        <a href="#" role="button" class="bg-terracotta-600 hover:bg-terracotta-500 !text-white font-medium text-sm px-6 py-2.5 rounded-full transition-transform hover:-translate-y-0.5 hover:shadow-[0_4px_15px_rgba(216,92,39,0.3)] active:translate-y-0 !no-underline">
+            Acceder
+        </a>
     </header>
 
-    <!-- Contenedor principal: El CSS lo divide en 3 columnas (1fr 1fr 260px) -->
-    <main role="main">
-        
-        <!-- Columna 1 (1fr): Textos principales del Hero -->
-        <article aria-labelledby="hero-titulo">
-            <span aria-label="Rutas activas">🔴 42 rutas activas</span>
-            <p>REGIÓN DE LA ARAUCANÍA · CHILE</p>
-            <h1 id="hero-titulo">Descubre la naturaleza salvaje del sur</h1>
-            <p>Conectamos negocios locales con viajeros que buscan experiencias auténticas en bosques, volcanes y lagos de la Araucanía.</p>
-        </article>
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main role="main" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 space-y-12 !bg-transparent !border-none">
 
-        <!-- Columna 2 (1fr): Espacio para la imagen del volcán -->
-        <style>
-    /* 1. Coloca la imagen como fondo de toda la página */
-   
-    body {
-        
-        background-image: url('https://d6myp1633h7qr.cloudfront.net/products/d7b4d419-7ba8-4f81-83ae-29525ec5083e_desktop.webp');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        color: #ffffff; /* Cambia el texto general a blanco */
-    }
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch w-full">
+            
+            <!-- HERO (IZQUIERDA) -->
+            <article aria-labelledby="hero-titulo" class="group lg:col-span-8 relative rounded-3xl overflow-hidden min-h-[520px] flex flex-col justify-between p-6 sm:p-10 border border-forest-700/60 bg-forest-900 !m-0 !bg-transparent cursor-default">
+                <div class="absolute inset-0 z-0 overflow-hidden">
+                    <img src="https://d6myp1633h7qr.cloudfront.net/products/d7b4d419-7ba8-4f81-83ae-29525ec5083e_desktop.webp" alt="Volcán La Araucanía" class="w-full h-full object-cover object-center brightness-75 group-hover:scale-105 group-hover:brightness-50 transition-all duration-1000 ease-out">
+                    <div class="absolute inset-0 hero-gradient"></div>
+                </div>
 
-    /* 2. Sobrescribe el fondo blanco (#FFFFFF) del starter.css para que sean semitransparentes */
-    header, nav, main, section, article, aside, footer {
-        background: rgba(0, 0, 0, 0.8) !important; /* Fondo negro al 80% de opacidad */
-        color: #ffffff;
-    }
+                <div class="relative z-10 flex items-center justify-between">
+                    <span aria-label="Rutas activas" class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-forest-950/80 backdrop-blur-md text-sm font-medium text-gray-200 border border-forest-700/50">
+                        <span class="w-2.5 h-2.5 rounded-full bg-terracotta-500 shadow-[0_0_8px_rgba(216,92,39,0.8)] animate-pulse"></span> 42 rutas activas
+                    </span>
+                </div>
 
-    /* 3. Ajustes de color para textos específicos para que no se pierdan */
-    h1, h2, h3, a, .logo {
-        color: #ffffff !important; 
-    }
-</style>
+                <div class="relative z-10 max-w-2xl my-auto py-8 transform transition-transform duration-700 group-hover:translate-x-2">
+                    <p class="text-xs sm:text-sm font-semibold tracking-widest text-terracotta-400 uppercase mb-3 drop-shadow-md">REGIÓN DE LA ARAUCANÍA · CHILE</p>
+                    <h1 id="hero-titulo" class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight !text-white mb-6 drop-shadow-lg">
+                        Descubre la naturaleza <br class="hidden sm:inline">
+                        <span class="text-terracotta-500 italic">salvaje del sur</span>
+                    </h1>
+                    <p class="text-gray-300 text-sm sm:text-lg leading-relaxed mb-8 max-w-xl drop-shadow-md">
+                        Conectamos negocios locales con viajeros que buscan experiencias auténticas en bosques, volcanes y lagos de la Araucanía.
+                    </p>
+                    <a href="#rutas" class="inline-flex items-center gap-2 bg-terracotta-600 hover:bg-terracotta-500 !text-white font-medium px-6 py-3 rounded-xl transition-all hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(216,92,39,0.25)] active:translate-y-0 !no-underline group/btn">
+                        <i class="fa-solid fa-compass group-hover/btn:rotate-45 transition-transform duration-300"></i> Explorar Ecorutas
+                    </a>
+                </div>
+            </article>
 
-        <!-- Columna 3 (260px): Panel derecho de acciones -->
-        <aside role="complementary" aria-labelledby="titulo-acciones">
-            <h2 id="titulo-acciones">¿QUÉ DESEAS HACER?</h2>
-            <ul>
-                <li>
-                    <a href="#">
-                        <strong>Publicar Anuncio</strong><br>
-                        <span>Comparte tu ecoruta</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <strong>Otros</strong><br>
-                        <span>Más opciones</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <strong>Ver Rutas</strong><br>
-                        <span>Explora La Araucanía</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <strong>Ajustes</strong><br>
-                        <span>Configuración</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <strong>Login</strong><br>
-                        <span>Ingresa a tu cuenta</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <strong>Negocios</strong><br>
-                        <span>Gestiona tu negocio</span>
-                    </a>
-                </li>
-            </ul>
-        </aside>
+            <!-- PANEL LATERAL (DERECHA) -->
+            <aside role="complementary" aria-labelledby="titulo-acciones" class="lg:col-span-4 bg-forest-800/90 border border-forest-700 rounded-3xl p-6 flex flex-col shadow-xl backdrop-blur-md !m-0">
+                <div class="flex items-center justify-between mb-5">
+                    <h2 id="titulo-acciones" class="text-xs font-bold tracking-widest !text-terracotta-400 uppercase flex items-center gap-2 !m-0 !font-sans">
+                        ¿QUÉ DESEAS HACER?
+                    </h2>
+                </div>
 
+                <ul class="grid grid-cols-2 gap-3 mb-6 !border-none">
+                    <li class="!border-none !p-0">
+                        <a href="#" class="block p-3.5 rounded-2xl bg-forest-850 border border-terracotta-500/50 hover:bg-forest-700 hover:border-terracotta-400 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 !no-underline group">
+                            <strong class="text-sm !text-terracotta-400 block group-hover:scale-105 origin-left transition-transform">📢 Publicar Anuncio</strong>
+                            <span class="text-[11px] text-gray-400 font-normal">Comparte tu ecoruta</span>
+                        </a>
+                    </li>
+                    <li class="!border-none !p-0">
+                        <a href="#" class="block p-3.5 rounded-2xl bg-forest-900/60 border border-forest-700/60 hover:bg-forest-700 hover:border-forest-500 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 !no-underline group">
+                            <strong class="text-sm !text-gray-200 block group-hover:text-emerald-400 transition-colors">🌿 Otros</strong>
+                            <span class="text-[11px] text-gray-400 font-normal">Más opciones</span>
+                        </a>
+                    </li>
+                    <li class="!border-none !p-0">
+                        <a href="#" class="block p-3.5 rounded-2xl bg-forest-900/60 border border-forest-700/60 hover:bg-forest-700 hover:border-forest-500 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 !no-underline group">
+                            <strong class="text-sm !text-gray-200 block group-hover:text-cyan-400 transition-colors">🗺️ Ver Rutas</strong>
+                            <span class="text-[11px] text-gray-400 font-normal">Explora La Araucanía</span>
+                        </a>
+                    </li>
+                    <li class="!border-none !p-0">
+                        <a href="#" class="block p-3.5 rounded-2xl bg-forest-900/60 border border-forest-700/60 hover:bg-forest-700 hover:border-forest-500 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 !no-underline group">
+                            <strong class="text-sm !text-gray-200 block group-hover:text-purple-400 transition-colors">⚙️ Ajustes</strong>
+                            <span class="text-[11px] text-gray-400 font-normal">Configuración</span>
+                        </a>
+                    </li>
+                    <li class="!border-none !p-0">
+                        <a href="#" class="block p-3.5 rounded-2xl bg-forest-900/60 border border-forest-700/60 hover:bg-forest-700 hover:border-forest-500 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 !no-underline group">
+                            <strong class="text-sm !text-gray-200 block group-hover:text-amber-400 transition-colors">🔑 Login</strong>
+                            <span class="text-[11px] text-gray-400 font-normal">Ingresa a tu cuenta</span>
+                        </a>
+                    </li>
+                    <li class="!border-none !p-0">
+                        <a href="#" class="block p-3.5 rounded-2xl bg-forest-900/60 border border-forest-700/60 hover:bg-forest-700 hover:border-forest-500 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 !no-underline group">
+                            <strong class="text-sm !text-terracotta-400 block group-hover:text-terracotta-300 transition-colors">🏪 Negocios</strong>
+                            <span class="text-[11px] text-gray-400 font-normal">Gestiona tu negocio</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+        </div>
     </main>
 
-    <!-- Pie de página -->
-    <footer role="contentinfo">
-        <p>&copy; 2026 Los Desenvocados · La Araucanía, Chile<br>Turismo sostenible y ecorutas</p>
+    <!-- PIE DE PÁGINA -->
+    <footer role="contentinfo" class="bg-forest-950 border-t border-forest-800 py-8 text-center text-xs text-gray-400 mt-auto">
+        <p class="!m-0">&copy; 2026 Los Desenvocados · La Araucanía, Chile<br><span class="text-emerald-500 font-medium hover:text-emerald-400 cursor-pointer transition-colors">Turismo sostenible y ecorutas</span></p>
     </footer>
 
 </body>
