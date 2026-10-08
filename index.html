@@ -1,182 +1,497 @@
 <!DOCTYPE html>
-<html lang="es" class="dark scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecorutas La Araucanía - Los Desenvocados</title>
+    <title>Ecorutas La Araucanía | Los Desenvocados</title>
     
-    <!-- Enlace a la hoja de estilos "visualizadora" (Intacta) -->
-    <link rel="stylesheet" href="06_starter.css">
-    
-    <!-- Tailwind CSS (Diseño moderno) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        forest: {
-                            950: '#070f0a', 900: '#0b1710', 850: '#102016', 
-                            800: '#13261a', 700: '#1a3323', 600: '#23442f', 500: '#2e563c'
-                        },
-                        terracotta: {
-                            400: '#f27238', 500: '#e06830', 600: '#d85c27', 700: '#b84618'
-                        }
-                    },
-                    fontFamily: {
-                        serif: ['Playfair Display', 'Georgia', 'serif'],
-                        sans: ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
     <style>
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #0b1710; }
-        ::-webkit-scrollbar-thumb { background: #1a3323; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #d85c27; }
+        /* ============================================================
+           VARIABLES Y CONFIGURACIÓN BASE
+           ============================================================ */
+        :root {
+            --bg-dark: #070f0a;
+            --bg-panel: rgba(11, 23, 16, 0.65);
+            --bg-card: rgba(19, 38, 26, 0.6);
+            --border-color: rgba(216, 92, 39, 0.2); 
+            --border-hover: rgba(216, 92, 39, 0.8);
+            --primary: #d85c27; 
+            --primary-hover: #f27238;
+            --accent: #10b981; 
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+            --font-sans: 'Inter', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        /* Efecto Parallax en el Body */
+        body {
+            background-color: var(--bg-dark);
+            background-image: linear-gradient(to bottom, rgba(7, 15, 10, 0.4), rgba(7, 15, 10, 0.95)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRMfKCO9BPhxOHVKOY2lu0WeREy8KFL6vPe0Jzz8-y_tSBNDeNprUYgdir&s=10');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Esto crea el efecto parallax */
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+        }
+
+        /* ============================================================
+           NAVEGACIÓN FIJA
+           ============================================================ */
+        .navbar { position: sticky; top: 0; z-index: 100; background: rgba(7, 15, 10, 0.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; height: 80px; }
+        .brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--text-main); }
+        .logo-icon { width: 42px; height: 42px; background: rgba(46, 86, 60, 0.4); border: 1px solid var(--accent); border-radius: 12px; display: flex; justify-content: center; align-items: center; color: var(--accent); font-size: 1.3rem; transition: all 0.4s; }
+        .brand:hover .logo-icon { transform: scale(1.1) rotate(15deg); background: var(--accent); color: var(--bg-dark); box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); }
+        .brand-text small { display: block; font-size: 0.65rem; color: var(--primary); letter-spacing: 0.15em; font-weight: 600; }
+        .brand-text strong { font-family: var(--font-serif); font-size: 1.4rem; letter-spacing: 0.5px; }
         
-        .hero-gradient {
-            background: linear-gradient(180deg, rgba(11, 23, 16, 0.4) 0%, rgba(11, 23, 16, 0.85) 75%, #0b1710 100%);
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; position: relative; padding-bottom: 5px; transition: color 0.3s; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); width: 0; height: 2px; background: var(--primary); transition: width 0.3s; }
+        .nav-links a:hover { color: var(--text-main); }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.7rem 1.8rem; border-radius: 50px; font-size: 0.9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: all 0.3s; border: none; overflow: hidden; }
+        .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 15px rgba(216, 92, 39, 0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(216, 92, 39, 0.5); background: var(--primary-hover); }
+        .btn-icon i { margin-right: 8px; transition: transform 0.3s; }
+        .btn-icon:hover i { transform: rotate(45deg) scale(1.2); }
+
+        /* ============================================================
+           SECCIÓN HERO (ARRIBA)
+           ============================================================ */
+        .hero-section { min-height: calc(100vh - 80px); display: flex; align-items: center; padding: 3rem 2rem; max-width: 1300px; margin: 0 auto; width: 100%; }
+        .hero-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: center; width: 100%; }
+        
+        .hero-card { padding-right: 2rem; animation: slideInLeft 0.8s ease-out forwards; }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+        
+        .badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.8rem; margin-bottom: 2rem; backdrop-filter: blur(4px); }
+        .dot { width: 10px; height: 10px; background-color: var(--primary); border-radius: 50%; animation: pulse-glow 2s infinite; }
+        @keyframes pulse-glow { 0% { box-shadow: 0 0 0 0 rgba(216, 92, 39, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(216, 92, 39, 0); } 100% { box-shadow: 0 0 0 0 rgba(216, 92, 39, 0); } }
+        
+        .subtitle { color: var(--primary); font-size: 0.85rem; font-weight: 700; letter-spacing: 3px; margin-bottom: 1rem; text-transform: uppercase; }
+        .hero-card h1 { font-family: var(--font-serif); font-size: 4.5rem; line-height: 1.1; margin-bottom: 1.5rem; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .description { font-size: 1.15rem; color: #e5e7eb; margin-bottom: 2.5rem; max-width: 90%; }
+        
+        .sidebar { background: var(--bg-panel); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.4); animation: slideInRight 0.8s ease-out forwards; }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+        .sidebar h2 { font-size: 0.85rem; color: var(--text-muted); letter-spacing: 1.5px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .sidebar h2::before { content: ''; display: block; width: 30px; height: 2px; background: var(--primary); }
+        
+        .action-grid { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .action-card { cursor: pointer; display: flex; flex-direction: column; padding: 1.2rem; background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; transition: all 0.4s; }
+        .action-card:hover { transform: translateY(-5px); background: rgba(30, 50, 38, 0.6); border-color: var(--border-hover); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .action-icon { font-size: 1.8rem; margin-bottom: 0.8rem; transition: transform 0.4s; }
+        .action-card:hover .action-icon { transform: scale(1.2) translateY(-3px); }
+        .action-info strong { display: block; font-size: 0.9rem; margin-bottom: 0.2rem; color: var(--text-main); transition: color 0.3s; }
+        .action-info span { font-size: 0.75rem; color: var(--text-muted); }
+        .action-card:hover .action-info strong { color: var(--primary); }
+
+        /* ============================================================
+           SECCIONES DE CONTENIDO (CATÁLOGO, COMUNIDAD, CONTACTO)
+           ============================================================ */
+        .content-section {
+            background: rgba(7, 15, 10, 0.95); /* Fondo oscuro casi sólido para leer bien */
+            padding: 5rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
         
-        /* Ajuste para los bordes del starter.css */
-        header, nav, main, section, article, aside, footer {
-            margin: 0 !important;
-        }
-        main {
-            display: flex !important;
-            flex-direction: column !important;
-        }
+        .section-inner { max-width: 1300px; margin: 0 auto; }
+        
+        .section-header { margin-bottom: 3rem; }
+        .section-header h2 { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .section-header p { color: var(--text-muted); font-size: 1rem; }
+
+        /* Catálogo Grid */
+        .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
+        .route-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; overflow: hidden; transition: all 0.4s; display: flex; flex-direction: column; }
+        .route-card:hover { transform: translateY(-8px); border-color: rgba(216, 92, 39, 0.4); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+        .route-img-wrapper { height: 200px; position: relative; overflow: hidden; }
+        .route-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .route-card:hover .route-img-wrapper img { transform: scale(1.08); }
+        
+        .route-badge { position: absolute; top: 15px; left: 15px; background: rgba(7,15,10,0.8); backdrop-filter: blur(4px); color: var(--accent); padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.7rem; font-weight: bold; border: 1px solid rgba(16,185,129,0.3); }
+        .route-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .route-cat { color: var(--primary); font-size: 0.7rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+        .route-content h3 { font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 0.8rem; }
+        .route-content p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem; flex-grow: 1; }
+        
+        .route-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1rem; margin-top: auto; }
+        .route-loc { font-size: 0.8rem; color: #d1d5db; display: flex; align-items: center; gap: 5px; }
+        .route-loc i { color: var(--primary); }
+        .route-rating { font-size: 0.8rem; font-weight: bold; color: #fbbf24; }
+
+        /* Comunidad (Texto + Imagen) */
+        .community-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .community-text h2 { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1.5rem; }
+        .community-text p { color: #d1d5db; margin-bottom: 1.5rem; font-size: 1.05rem; }
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+        .feature-box { background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        .feature-box i { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .community-img { border-radius: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        .community-img img { width: 100%; display: block; }
+
+        /* Contacto y FAQ */
+        .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .contact-box { background: var(--bg-card); padding: 2.5rem; border-radius: 24px; border: 1px solid rgba(255,255,255,0.05); }
+        .contact-box h3 { font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .contact-box p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; }
+        
+        .faq-accordion details { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; margin-bottom: 1rem; padding: 1rem 1.5rem; cursor: pointer; transition: background 0.3s; }
+        .faq-accordion details:hover { background: rgba(255,255,255,0.06); }
+        .faq-accordion summary { font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center; outline: none; }
+        .faq-accordion summary::-webkit-details-marker { display: none; }
+        .faq-accordion p { margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05); }
+
+        /* Formularios compartidos */
+        .form-group { margin-bottom: 1.5rem; text-align: left; }
+        .form-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .form-input { width: 100%; padding: 0.8rem 1.2rem; background: rgba(7, 15, 10, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: var(--text-main); font-family: var(--font-sans); transition: all 0.3s; }
+        .form-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 10px rgba(216, 92, 39, 0.2); }
+        .btn-full { width: 100%; padding: 1rem; border-radius: 12px; font-size: 1rem; }
+
+        /* ============================================================
+           FOOTER Y MODALES
+           ============================================================ */
+        .footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.05); background: var(--bg-dark); font-size: 0.85rem; color: var(--text-muted); }
+        .eco-text { color: var(--accent); font-weight: 600; margin-top: 0.5rem; }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 999; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal-box { background: #0b1710; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; padding: 2.5rem; width: 90%; max-width: 450px; transform: translateY(30px); transition: transform 0.4s; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); position: relative; }
+        .modal-overlay.active .modal-box { transform: translateY(0); }
+        .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; transition: color 0.3s; }
+        .modal-close:hover { color: var(--primary); }
+        .modal-header { text-align: center; margin-bottom: 2rem; }
+        .modal-header i { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
+        .modal-header h3 { font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 0.5rem; }
+
+        .toast { position: fixed; top: 20px; right: -300px; background: var(--accent); color: #000; padding: 1rem 2rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3); transition: right 0.4s; z-index: 1000; display: flex; align-items: center; gap: 10px; }
+        .toast.show { right: 20px; }
+
+        /* Media Queries */
+        @media (max-width: 1024px) { .hero-layout, .community-layout, .contact-layout { grid-template-columns: 1fr; } .hero-card { padding-right: 0; text-align: center; } .badge { align-self: center; } .description { margin: 0 auto 2.5rem auto; } }
+        @media (max-width: 768px) { .hero-card h1 { font-size: 3rem; } .nav-links { display: none; } .action-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
-<body class="bg-[#0b1710] text-gray-100 font-sans min-h-screen flex flex-col antialiased" style="background-image: none;">
+<body>
 
-    <!-- ENCABEZADO Y NAVEGACIÓN -->
-    <header class="sticky top-0 z-40 bg-[#0b1710]/90 backdrop-blur-md border-b border-forest-700/50 flex items-center justify-between px-4 sm:px-8 h-20" role="banner">
-        <a href="#" class="flex items-center gap-3 group logo !text-white hover:opacity-80 transition-opacity">
-            <div class="w-10 h-10 rounded-xl bg-forest-800 border border-forest-600/60 flex items-center justify-center text-terracotta-500 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                <i class="fa-solid fa-tree text-xl text-emerald-500"></i>
-            </div>
-            <div>
-                <small class="text-[10px] tracking-widest font-semibold uppercase text-terracotta-500 block">ECORUTAS · LA ARAUCANÍA</small>
-                <strong class="font-serif text-xl sm:text-2xl font-bold text-white tracking-wide">Los Desenvocados</strong>
+    <!-- Navegación Fija -->
+    <header class="navbar">
+        <a href="#" class="brand">
+            <div class="logo-icon"><i class="fa-solid fa-tree"></i></div>
+            <div class="brand-text">
+                <small>ECORUTAS · LA ARAUCANÍA</small>
+                <strong>Los Desenvocados</strong>
             </div>
         </a>
-
-        <nav role="navigation" aria-label="Menú principal" class="hidden md:flex items-center gap-8 font-medium text-sm !bg-transparent !border-none !p-0">
-            <ul class="flex gap-8 !border-none">
-                <li class="!border-none !p-0"><a href="#rutas" class="relative pb-1 !text-gray-300 hover:!text-white !font-normal after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-terracotta-400 after:transition-all hover:after:w-full">Rutas</a></li>
-                <li class="!border-none !p-0"><a href="#negocios" class="relative pb-1 !text-gray-300 hover:!text-white !font-normal after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-terracotta-400 after:transition-all hover:after:w-full">Negocios</a></li>
-                <li class="!border-none !p-0"><a href="#comunidad" class="relative pb-1 !text-gray-300 hover:!text-white !font-normal after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-terracotta-400 after:transition-all hover:after:w-full">Comunidad</a></li>
-                <li class="!border-none !p-0"><a href="#contacto" class="relative pb-1 !text-gray-300 hover:!text-white !font-normal after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-terracotta-400 after:transition-all hover:after:w-full">Contacto</a></li>
-            </ul>
+        <nav class="nav-links">
+            <a href="#rutas">Rutas</a>
+            <a href="#comunidad">Comunidad</a>
+            <a href="#contacto">Contacto</a>
         </nav>
-
-        <a href="#" role="button" class="bg-terracotta-600 hover:bg-terracotta-500 !text-white font-medium text-sm px-6 py-2.5 rounded-full transition-transform hover:-translate-y-0.5 hover:shadow-[0_4px_15px_rgba(216,92,39,0.3)] active:translate-y-0 !no-underline">
-            Acceder
-        </a>
+        <button onclick="openModal('modal-login')" class="btn btn-primary">Acceder</button>
     </header>
 
-    <!-- CONTENEDOR PRINCIPAL -->
-    <main role="main" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 space-y-12 !bg-transparent !border-none">
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch w-full">
-            
-            <!-- HERO (IZQUIERDA) -->
-            <article aria-labelledby="hero-titulo" class="group lg:col-span-8 relative rounded-3xl overflow-hidden min-h-[520px] flex flex-col justify-between p-6 sm:p-10 border border-forest-700/60 bg-forest-900 !m-0 !bg-transparent cursor-default">
-                <div class="absolute inset-0 z-0 overflow-hidden">
-                    <img src="https://d6myp1633h7qr.cloudfront.net/products/d7b4d419-7ba8-4f81-83ae-29525ec5083e_desktop.webp" alt="Volcán La Araucanía" class="w-full h-full object-cover object-center brightness-75 group-hover:scale-105 group-hover:brightness-50 transition-all duration-1000 ease-out">
-                    <div class="absolute inset-0 hero-gradient"></div>
-                </div>
-
-                <div class="relative z-10 flex items-center justify-between">
-                    <span aria-label="Rutas activas" class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-forest-950/80 backdrop-blur-md text-sm font-medium text-gray-200 border border-forest-700/50">
-                        <span class="w-2.5 h-2.5 rounded-full bg-terracotta-500 shadow-[0_0_8px_rgba(216,92,39,0.8)] animate-pulse"></span> 42 rutas activas
-                    </span>
-                </div>
-
-                <div class="relative z-10 max-w-2xl my-auto py-8 transform transition-transform duration-700 group-hover:translate-x-2">
-                    <p class="text-xs sm:text-sm font-semibold tracking-widest text-terracotta-400 uppercase mb-3 drop-shadow-md">REGIÓN DE LA ARAUCANÍA · CHILE</p>
-                    <h1 id="hero-titulo" class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight !text-white mb-6 drop-shadow-lg">
-                        Descubre la naturaleza <br class="hidden sm:inline">
-                        <span class="text-terracotta-500 italic">salvaje del sur</span>
-                    </h1>
-                    <p class="text-gray-300 text-sm sm:text-lg leading-relaxed mb-8 max-w-xl drop-shadow-md">
-                        Conectamos negocios locales con viajeros que buscan experiencias auténticas en bosques, volcanes y lagos de la Araucanía.
-                    </p>
-                    <a href="#rutas" class="inline-flex items-center gap-2 bg-terracotta-600 hover:bg-terracotta-500 !text-white font-medium px-6 py-3 rounded-xl transition-all hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(216,92,39,0.25)] active:translate-y-0 !no-underline group/btn">
-                        <i class="fa-solid fa-compass group-hover/btn:rotate-45 transition-transform duration-300"></i> Explorar Ecorutas
-                    </a>
-                </div>
+    <!-- Sección 1: Hero Principal con Parallax -->
+    <section class="hero-section">
+        <div class="hero-layout">
+            <article class="hero-card">
+                <div class="badge"><span class="dot pulse"></span> 42 rutas activas</div>
+                <p class="subtitle">Región de La Araucanía · Chile</p>
+                <h1>Descubre la naturaleza <i>salvaje del sur</i></h1>
+                <p class="description">Apoyamos a comunidades y negocios locales, conectándolos con viajeros que buscan explorar bosques, volcanes y lagos con un enfoque sustentable.</p>
+                <a href="#rutas" class="btn btn-primary btn-icon">
+                    <i class="fa-solid fa-compass"></i> Explorar Ecorutas
+                </a>
             </article>
 
-            <!-- PANEL LATERAL (DERECHA) -->
-            <aside role="complementary" aria-labelledby="titulo-acciones" class="lg:col-span-4 bg-forest-800/90 border border-forest-700 rounded-3xl p-6 flex flex-col shadow-xl backdrop-blur-md !m-0">
-                <div class="flex items-center justify-between mb-5">
-                    <h2 id="titulo-acciones" class="text-xs font-bold tracking-widest !text-terracotta-400 uppercase flex items-center gap-2 !m-0 !font-sans">
-                        ¿QUÉ DESEAS HACER?
-                    </h2>
-                </div>
-
-                <ul class="grid grid-cols-2 gap-3 mb-6 !border-none">
-                    <li class="!border-none !p-0">
-                        <a href="#" class="block p-3.5 rounded-2xl bg-forest-850 border border-terracotta-500/50 hover:bg-forest-700 hover:border-terracotta-400 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 !no-underline group">
-                            <strong class="text-sm !text-terracotta-400 block group-hover:scale-105 origin-left transition-transform">📢 Publicar Anuncio</strong>
-                            <span class="text-[11px] text-gray-400 font-normal">Comparte tu ecoruta</span>
+            <!-- Menú Lateral Flotante -->
+            <aside class="sidebar">
+                <h2>¿QUÉ DESEAS HACER?</h2>
+                <ul class="action-grid">
+                    <li>
+                        <div onclick="openModal('modal-publicar')" class="action-card">
+                            <div class="action-icon">📢</div>
+                            <div class="action-info">
+                                <strong>Publicar Anuncio</strong>
+                                <span>Comparte tu ecoruta</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#rutas" class="action-card" style="text-decoration: none;">
+                            <div class="action-icon">🗺️</div>
+                            <div class="action-info">
+                                <strong>Ver Rutas</strong>
+                                <span>Explora el mapa</span>
+                            </div>
                         </a>
                     </li>
-                    <li class="!border-none !p-0">
-                        <a href="#" class="block p-3.5 rounded-2xl bg-forest-900/60 border border-forest-700/60 hover:bg-forest-700 hover:border-forest-500 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 !no-underline group">
-                            <strong class="text-sm !text-gray-200 block group-hover:text-emerald-400 transition-colors">🌿 Otros</strong>
-                            <span class="text-[11px] text-gray-400 font-normal">Más opciones</span>
-                        </a>
+                    <li>
+                        <div onclick="openModal('modal-ajustes')" class="action-card">
+                            <div class="action-icon">⚙️</div>
+                            <div class="action-info">
+                                <strong>Ajustes</strong>
+                                <span>Configuración</span>
+                            </div>
+                        </div>
                     </li>
-                    <li class="!border-none !p-0">
-                        <a href="#" class="block p-3.5 rounded-2xl bg-forest-900/60 border border-forest-700/60 hover:bg-forest-700 hover:border-forest-500 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 !no-underline group">
-                            <strong class="text-sm !text-gray-200 block group-hover:text-cyan-400 transition-colors">🗺️ Ver Rutas</strong>
-                            <span class="text-[11px] text-gray-400 font-normal">Explora La Araucanía</span>
-                        </a>
-                    </li>
-                    <li class="!border-none !p-0">
-                        <a href="#" class="block p-3.5 rounded-2xl bg-forest-900/60 border border-forest-700/60 hover:bg-forest-700 hover:border-forest-500 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 !no-underline group">
-                            <strong class="text-sm !text-gray-200 block group-hover:text-purple-400 transition-colors">⚙️ Ajustes</strong>
-                            <span class="text-[11px] text-gray-400 font-normal">Configuración</span>
-                        </a>
-                    </li>
-                    <li class="!border-none !p-0">
-                        <a href="#" class="block p-3.5 rounded-2xl bg-forest-900/60 border border-forest-700/60 hover:bg-forest-700 hover:border-forest-500 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 !no-underline group">
-                            <strong class="text-sm !text-gray-200 block group-hover:text-amber-400 transition-colors">🔑 Login</strong>
-                            <span class="text-[11px] text-gray-400 font-normal">Ingresa a tu cuenta</span>
-                        </a>
-                    </li>
-                    <li class="!border-none !p-0">
-                        <a href="#" class="block p-3.5 rounded-2xl bg-forest-900/60 border border-forest-700/60 hover:bg-forest-700 hover:border-forest-500 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 !no-underline group">
-                            <strong class="text-sm !text-terracotta-400 block group-hover:text-terracotta-300 transition-colors">🏪 Negocios</strong>
-                            <span class="text-[11px] text-gray-400 font-normal">Gestiona tu negocio</span>
-                        </a>
+                    <li>
+                        <div onclick="openModal('modal-login')" class="action-card">
+                            <div class="action-icon">🔑</div>
+                            <div class="action-info">
+                                <strong>Ingresar</strong>
+                                <span>Accede a tu cuenta</span>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </aside>
         </div>
-    </main>
+    </section>
 
-    <!-- PIE DE PÁGINA -->
-    <footer role="contentinfo" class="bg-forest-950 border-t border-forest-800 py-8 text-center text-xs text-gray-400 mt-auto">
-        <p class="!m-0">&copy; 2026 Los Desenvocados · La Araucanía, Chile<br><span class="text-emerald-500 font-medium hover:text-emerald-400 cursor-pointer transition-colors">Turismo sostenible y ecorutas</span></p>
+    <!-- Sección 2: Catálogo de Ecorutas -->
+    <section id="rutas" class="content-section">
+        <div class="section-inner">
+            <div class="section-header">
+                <p class="subtitle" style="margin-bottom: 0;">Catálogo Auténtico</p>
+                <h2>Ecorutas Registradas</h2>
+                <p>Explora experiencias validadas por emprendedores de las distintas comunas de La Araucanía.</p>
+            </div>
+            
+            <div class="catalog-grid">
+                <!-- Tarjeta 1 -->
+                <article class="route-card">
+                    <div class="route-img-wrapper">
+                        <span class="route-badge"><i class="fa-solid fa-check"></i> 100% Eco Guía</span>
+                        <img src="https://cdn.wildtrip.cl/cdn-cgi/image/format=auto,width=1024,quality=75/uploads/experiences/E4W3y3KMhXxdbYpGewLn/BfhGyrVtNM2MVhTUKIVkB-IMG_1172.jpeg" alt="Kayak en Icalma">
+                    </div>
+                    <div class="route-content">
+                        <span class="route-cat">Kayak Náutico</span>
+                        <h3>Travesía Kayak Laguna Icalma</h3>
+                        <p>Navegación guiada en aguas cristalinas rodeadas de Araucarias milenarias y vistas a la cordillera.</p>
+                        <div class="route-footer">
+                            <span class="route-loc"><i class="fa-solid fa-location-dot"></i> Icalma, Lonquimay</span>
+                            <span class="route-rating"><i class="fa-solid fa-star"></i> 4.9</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Tarjeta 2 -->
+                <article class="route-card">
+                    <div class="route-img-wrapper">
+                        <span class="route-badge" style="color: #fbbf24; border-color: rgba(251, 191, 36, 0.3);"><i class="fa-solid fa-leaf"></i> Parque Nacional</span>
+                        <img src="https://pewenmapu.cl/wp-content/uploads/2025/04/Trekking-Sendero-Sierra-Nevada-Turismo-Pewen-Mapu-Melipeuco-4.jpg" alt="Conguillio">
+                    </div>
+                    <div class="route-content">
+                        <span class="route-cat">Trekking</span>
+                        <h3>Sendero Sierra Nevada</h3>
+                        <p>Caminata espectacular contemplando el Volcán Llaima y los lagos boscosos del Parque Nacional Conguillío.</p>
+                        <div class="route-footer">
+                            <span class="route-loc"><i class="fa-solid fa-location-dot"></i> Curacautín</span>
+                            <span class="route-rating"><i class="fa-solid fa-star"></i> 5.0</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Tarjeta 3 -->
+                <article class="route-card">
+                    <div class="route-img-wrapper">
+                        <span class="route-badge" style="color: #60a5fa; border-color: rgba(96, 165, 250, 0.3);"><i class="fa-solid fa-fire"></i> Patrimonio</span>
+                        <img src="https://sietelagos.cl/wp-content/uploads/2022/06/dondecomer-quincho-quehacer-panguipulli-2.png" alt="Gastronomia Mapuche">
+                    </div>
+                    <div class="route-content">
+                        <span class="route-cat">Gastronomía Mapuche</span>
+                        <h3>Ruka Tradicional y Sabores</h3>
+                        <p>Degustación de piñones frescos, catuto, sopaipillas con digüeñes y relatos de locales.</p>
+                        <div class="route-footer">
+                            <span class="route-loc"><i class="fa-solid fa-location-dot"></i> Curarrehue</span>
+                            <span class="route-rating"><i class="fa-solid fa-star"></i> 4.8</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 3: Comunidad e Impacto -->
+    <section id="comunidad" class="content-section" style="background: rgba(4, 9, 6, 0.98);">
+        <div class="section-inner community-layout">
+            <div class="community-text">
+                <span class="subtitle">Identidad & Territorio</span>
+                <h2>Turismo con respeto por el Bosque Templado</h2>
+                <p>En La Araucanía, cada sendero cuenta una historia milenaria. Nuestra plataforma no cobra comisiones ocultas; buscamos fortalecer directamente la economía de las comunidades locales.</p>
+                <p>Apoyamos el comercio justo, el resguardo del piñón (ngülliñ) y la conservación del bosque nativo frente al turismo masivo.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-box">
+                        <i class="fa-solid fa-seedling" style="color: var(--accent);"></i>
+                        <h4>Huella Cero</h4>
+                        <p style="font-size: 0.8rem; margin: 0; color: var(--text-muted);">Prácticas sin impacto de carbono.</p>
+                    </div>
+                    <div class="feature-box">
+                        <i class="fa-solid fa-hands-holding-circle" style="color: var(--primary);"></i>
+                        <h4>Comercio Justo</h4>
+                        <p style="font-size: 0.8rem; margin: 0; color: var(--text-muted);">El 100% de los ingresos van al local.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="community-img">
+                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80" alt="Bosque de Araucarias">
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 4: Contacto y Preguntas Frecuentes -->
+    <section id="contacto" class="content-section">
+        <div class="section-inner contact-layout">
+            <!-- Formulario -->
+            <div class="contact-box">
+                <h3>Conversemos</h3>
+                <p>¿Tienes dudas sobre cómo publicar tu ecoruta o quieres formar una alianza con nosotros?</p>
+                <form onsubmit="handleForm(event, '', '¡Mensaje enviado correctamente! Te responderemos pronto.')">
+                    <div class="form-group">
+                        <label>Nombre Completo</label>
+                        <input type="text" class="form-input" required placeholder="Tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label>Correo Electrónico</label>
+                        <input type="email" class="form-input" required placeholder="correo@ejemplo.cl">
+                    </div>
+                    <div class="form-group">
+                        <label>Mensaje</label>
+                        <textarea class="form-input" rows="3" required placeholder="Cuéntanos..." style="resize: none;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Enviar Mensaje</button>
+                </form>
+            </div>
+
+            <!-- Acordeón FAQ -->
+            <div class="faq-accordion">
+                <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 1.5rem;">Preguntas Frecuentes</h3>
+                
+                <details>
+                    <summary>¿Tiene algún costo publicar mi negocio? <i class="fa-solid fa-chevron-down" style="color: var(--primary);"></i></summary>
+                    <p>No, el registro en nuestro catálogo de Ecorutas es completamente gratuito para los emprendedores locales nacidos o residentes en La Araucanía. Nuestro objetivo es visibilizar tu trabajo.</p>
+                </details>
+                
+                <details>
+                    <summary>¿Qué comunas abarca la plataforma? <i class="fa-solid fa-chevron-down" style="color: var(--primary);"></i></summary>
+                    <p>Actualmente trabajamos con emprendimientos ubicados en Pucón, Villarrica, Curacautín, Malalcahuello, Melipeuco, Icalma, Cunco, Curarrehue y alrededores.</p>
+                </details>
+                
+                <details>
+                    <summary>¿Cómo verifican los lugares ecológicos? <i class="fa-solid fa-chevron-down" style="color: var(--primary);"></i></summary>
+                    <p>Realizamos visitas en terreno y entrevistas con la comunidad para asegurar que las ecorutas respeten la gestión de residuos, el reciclaje y no perturben la flora y fauna endémica de la región.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div>
+            <p>&copy; 2026 Los Desenvocados · La Araucanía, Chile</p>
+            <p class="eco-text">Turismo sostenible y ecorutas</p>
+        </div>
     </footer>
 
+    <!-- ============================================================
+         VENTANAS MODALES
+         ============================================================ -->
+    
+    <div id="modal-login" class="modal-overlay">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('modal-login')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <i class="fa-solid fa-key"></i>
+                <h3>Iniciar Sesión</h3>
+                <p>Accede para gestionar tus ecorutas.</p>
+            </div>
+            <form onsubmit="handleForm(event, 'modal-login', '¡Sesión iniciada con éxito!')">
+                <div class="form-group"><label>Correo Electrónico</label><input type="email" class="form-input" required placeholder="usuario@araucania.cl"></div>
+                <div class="form-group"><label>Contraseña</label><input type="password" class="form-input" required placeholder="••••••••"></div>
+                <button type="submit" class="btn btn-primary btn-full">Ingresar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-publicar" class="modal-overlay">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('modal-publicar')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <i class="fa-solid fa-bullhorn"></i>
+                <h3>Publicar Anuncio</h3>
+                <p>Únete al directorio sustentable.</p>
+            </div>
+            <form onsubmit="handleForm(event, 'modal-publicar', '¡Tu anuncio está en revisión para publicarse!')">
+                <div class="form-group"><label>Nombre del Negocio</label><input type="text" class="form-input" required placeholder="Ej. Trekking Volcán Llaima"></div>
+                <div class="form-group"><label>Ubicación</label><input type="text" class="form-input" required placeholder="Ej. Pucón, Curacautín..."></div>
+                <button type="submit" class="btn btn-primary btn-full">Enviar Solicitud</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-ajustes" class="modal-overlay">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('modal-ajustes')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <i class="fa-solid fa-gear" style="color: #9ca3af;"></i>
+                <h3 style="color: #fff;">Ajustes</h3>
+            </div>
+            <form onsubmit="handleForm(event, 'modal-ajustes', 'Configuración guardada.')">
+                <div class="form-group" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+                    <label style="margin: 0;">Recibir Notificaciones</label>
+                    <input type="checkbox" checked style="width: 18px; height: 18px;">
+                </div>
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label>Idioma Preferido</label>
+                    <select class="form-input">
+                        <option>Español (Chile)</option>
+                        <option>English</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full" style="background: rgba(255,255,255,0.1); color: white; box-shadow: none;">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">
+        <i class="fa-solid fa-circle-check"></i> <span id="toast-msg">Mensaje</span>
+    </div>
+
+    <script>
+        function openModal(modalId) { document.getElementById(modalId).classList.add('active'); }
+        function closeModal(modalId) { document.getElementById(modalId).classList.remove('active'); }
+        
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+        }
+
+        function handleForm(event, modalId, successMessage) {
+            event.preventDefault();
+            if(modalId) closeModal(modalId);
+            showToast(successMessage);
+            event.target.reset();
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.classList.remove('active');
+            }
+        }
+    </script>
 </body>
 </html>
