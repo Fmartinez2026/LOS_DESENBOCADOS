@@ -1,5 +1,6 @@
 const URL_CLIMA =
-  "https://api.open-meteo.com/v1/forecast?latitude=-38.74&longitude=-72.60&current=temperature_2m,wind_speed_10m,weather_code";
+  "https://api.open-meteo.com/v1/forecast?latitude=-38.8&longitude=-71.3" +
+  "&current=temperature_2m,wind_speed_10m,weather_code&timezone=America/Santiago";
 
 const estado = document.querySelector("#estado");
 const temperatura = document.querySelector("#temperatura");
@@ -72,14 +73,16 @@ async function cargarClima() {
   }
 }
 
-botonToggle.addEventListener("click", () => {
-  const mostrarDetalle = detalleClima.hidden;
+if (estado && botonToggle && detalleClima) {
+  botonToggle.addEventListener("click", () => {
+    const mostrarDetalle = detalleClima.hidden;
 
-  detalleClima.hidden = !mostrarDetalle;
-  botonToggle.setAttribute("aria-expanded", String(mostrarDetalle));
-  botonToggle.textContent = mostrarDetalle
-    ? "Ocultar detalle del clima"
-    : "Ver detalle del clima";
-});
+    detalleClima.hidden = !mostrarDetalle;
+    botonToggle.setAttribute("aria-expanded", String(mostrarDetalle));
+    botonToggle.textContent = mostrarDetalle
+      ? "Ocultar detalle del clima"
+      : "Ver detalle del clima";
+  });
 
-cargarClima();
+  cargarClima();
+}
