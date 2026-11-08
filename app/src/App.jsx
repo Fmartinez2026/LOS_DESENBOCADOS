@@ -1,12 +1,12 @@
-import Encabezado from /components/Encabezado.jsx;
-import BannerPrincipal from /components/BannerPrincipal.jsx;
-import TarjetaRuta from /components/TarjetaRuta.jsx;
-import ListaRutas from /components/ListaRutas.jsx;
-import ListaEmprendimientos from /components/ListaEmprendimientos.jsx;
-import PiePagina from /components/PiePagina.jsx;
-import { rutas } from /datos/rutas.js;
-import { emprendimientos } from /datos/emprendimientos.js;
-import imagenPrueba from /assets/react.svg;
+import Encabezado from "./components/Encabezado.jsx";
+import BannerPrincipal from "./components/BannerPrincipal.jsx";
+import TarjetaRuta from "./components/TarjetaRuta.jsx";
+import ListaRutas from "./components/ListaRutas.jsx";
+import ListaEmprendimientos from "./components/ListaEmprendimientos.jsx";
+import PiePagina from "./components/PiePagina.jsx";
+import { rutas } from "./datos/rutas.js";
+import { emprendimientos } from "./datos/emprendimientos.js";
+import imagenPrueba from "./assets/react.svg";
 function App() {
 return (
 <>
