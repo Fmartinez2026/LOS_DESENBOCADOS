@@ -1,40 +1,28 @@
 import Encabezado from "./components/Encabezado.jsx";
-import BannerPrincipal from "./components/BannerPrincipal.jsx";
-import TarjetaRuta from "./components/TarjetaRuta.jsx";
-import ListaRutas from "./components/ListaRutas.jsx";
-import ListaEmprendimientos from "./components/ListaEmprendimientos.jsx";
 import PiePagina from "./components/PiePagina.jsx";
-import { rutas } from "./datos/rutas.js";
-import { emprendimientos } from "./datos/emprendimientos.js";
-import imagenPrueba from "./assets/react.svg";
+import { Route, Routes } from "react-router";
+import Inicio from "./paginas/Inicio.jsx";
+import Rutas from "./paginas/Rutas.jsx";
+import DetalleRuta from "./paginas/DetalleRuta.jsx";
+import Emprendimientos from "./paginas/Emprendimientos.jsx";
+import NoEncontrada from "./paginas/NoEncontrada.jsx";
+
 function App() {
-return (
-<>
-<Encabezado
-enlaces={["Inicio", "Rutas", "Contacto"]}
-paginaActual="Inicio"
-/>
-<main>
-<BannerPrincipal
-titulo="Rutas sostenibles de La Araucanía"
-subtitulo="Senderos y emprendimientos cerca de Temuco"
-/>
-{/* Tarjeta de prueba (encargo C): se quita al final */}
-<TarjetaRuta
-nombre="Cerro Ñielol"
-imagen={imagenPrueba}
-alt="Imagen de prueba"
-distanciaKm={4}
-dificultad="baja"
-accesible={true}
-/>
-<ListaRutas rutas={rutas} />
-<ListaEmprendimientos emprendimientos={emprendimientos} />
-</main>
-<PiePagina />
-</>
-);
+  return (
+    <>
+      <Encabezado />
+      <main>
+        <Routes>
+          <Route path="/" element={<Inicio />} />
+          <Route path="/rutas" element={<Rutas />} />
+          <Route path="/rutas/:id" element={<DetalleRuta />} />
+          <Route path="/emprendimientos" element={<Emprendimientos />} />
+          <Route path="*" element={<NoEncontrada />} />
+        </Routes>
+      </main>
+      <PiePagina />
+    </>
+  );
 }
+
 export default App;
-
-
