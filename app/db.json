@@ -1,0 +1,30 @@
+{
+  "rutas": [
+    {
+      "id": 1,
+      "nombre": "Cerro Ñielol",
+      "imagen": "/src/assets/react.svg",
+      "alt": "Imagen de prueba",
+      "distanciaKm": 4,
+      "dificultad": "baja",
+      "accesible": true
+    }
+  ],
+  "emprendimientos": [],
+  "resenas": [
+    {
+      "id": 1,
+      "rutaId": 1,
+      "calificacion": 5,
+      "comentario": "Una experiencia muy agradable.",
+      "fecha": "2026-11-18"
+    },
+    {
+      "id": 2,
+      "rutaId": 1,
+      "calificacion": 4,
+      "comentario": "El recorrido estuvo bien señalizado.",
+      "fecha": "2026-11-18"
+    }
+  ]
+}
