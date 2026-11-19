@@ -1,25 +1,33 @@
 import { Link } from "react-router";
 
-export default function TarjetaRuta({ id, ruta }) {
+export default function TarjetaRuta({
+  id,
+  nombre,
+  imagen,
+  alt,
+  distanciaKm,
+  dificultad,
+  accesible,
+}) {
   return (
     <article className="route-card">
       <div className="route-img-wrapper">
-        <img src={ruta.imagen} alt={ruta.alt} />
-        <span className="route-badge">{ruta.dificultad}</span>
+        <img src={imagen} alt={alt || nombre} />
+        <span className="route-badge">{dificultad}</span>
       </div>
       <div className="route-content">
-        <p className="route-cat">{ruta.distanciaKm} km</p>
-        <h3>{ruta.nombre}</h3>
+        <p className="route-cat">{distanciaKm} km</p>
+        <h3>{nombre}</h3>
         <p>
-          {ruta.accesible
+          {accesible
             ? "Accesible para personas con movilidad reducida."
             : "No cuenta con acceso adaptado para movilidad reducida."}
         </p>
         <div className="route-footer">
           <span className="route-loc">
-            Dificultad: {ruta.dificultad}
+            Dificultad: {dificultad}
           </span>
-          <Link className="btn btn-primary" to={`/rutas/${id}`}>
+          <Link className="btn btn-primary" to={id ? `/rutas/${id}` : "/rutas"}>
             Ver ruta
           </Link>
         </div>
