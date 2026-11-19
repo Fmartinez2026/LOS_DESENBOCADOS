@@ -1,23 +1,18 @@
-import TarjetaRuta from "./TarjetaRuta";
+import TarjetaRuta from "./TarjetaRuta.jsx";
 
-export default function ListaRutas({ rutas = [] }) {
-  if (rutas.length === 0) {
-    return <p className="lista-rutas__vacio">No hay rutas disponibles.</p>;
-  }
-
+export default function ListaRutas({ rutas, titulo = "Rutas destacadas" }) {
   return (
-    <section className="lista-rutas">
-      {rutas.map((ruta) => (
-        <TarjetaRuta
-          key={ruta.id}
-          nombre={ruta.nombre}
-          imagen={ruta.imagen}
-          alt={ruta.alt}
-          distanciaKm={ruta.distanciaKm}
-          dificultad={ruta.dificultad}
-          accesible={ruta.accesible}
-        />
-      ))}
+    <section className="lista">
+      <h2>{titulo}</h2>
+      {rutas.length > 0 ? (
+        <div className="catalog-grid">
+          {rutas.map((ruta) => (
+            <TarjetaRuta key={ruta.id} id={ruta.id} ruta={ruta} />
+          ))}
+        </div>
+      ) : (
+        <p>No hay rutas disponibles para esta dificultad.</p>
+      )}
     </section>
   );
 }
