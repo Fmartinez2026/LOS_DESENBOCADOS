@@ -1,4 +1,7 @@
+import { Link } from "react-router";
+
 export default function TarjetaRuta({
+  id,
   nombre,
   imagen,
   alt,
@@ -7,27 +10,27 @@ export default function TarjetaRuta({
   accesible,
 }) {
   return (
-    <article className="tarjeta-ruta">
-      <img
-        src={imagen}
-        alt={alt || nombre}
-        className="tarjeta-ruta__imagen"
-      />
-
-      <div className="tarjeta-ruta__contenido">
-        <h3 className="tarjeta-ruta__titulo">{nombre}</h3>
-
-        <ul className="tarjeta-ruta__detalles">
-          <li>
-            <strong>Distancia:</strong> {distanciaKm} km
-          </li>
-          <li>
-            <strong>Dificultad:</strong> {dificultad}
-          </li>
-          <li>
-            <strong>Accesible:</strong> {accesible ? "Sí" : "No"}
-          </li>
-        </ul>
+    <article className="route-card">
+      <div className="route-img-wrapper">
+        <img src={imagen} alt={alt || nombre} />
+        <span className="route-badge">{dificultad}</span>
+      </div>
+      <div className="route-content">
+        <p className="route-cat">{distanciaKm} km</p>
+        <h3>{nombre}</h3>
+        <p>
+          {accesible
+            ? "Accesible para personas con movilidad reducida."
+            : "No cuenta con acceso adaptado para movilidad reducida."}
+        </p>
+        <div className="route-footer">
+          <span className="route-loc">
+            Dificultad: {dificultad}
+          </span>
+          <Link className="btn btn-primary" to={id ? `/rutas/${id}` : "/rutas"}>
+            Ver ruta
+          </Link>
+        </div>
       </div>
     </article>
   );
