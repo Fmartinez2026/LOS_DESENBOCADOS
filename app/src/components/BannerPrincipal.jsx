@@ -1,4 +1,5 @@
 import Buscador from "./Buscador.jsx";
+import { Link } from "react-router";
 
 export default function BannerPrincipal({ titulo, subtitulo }) {
   return (
@@ -19,9 +20,9 @@ export default function BannerPrincipal({ titulo, subtitulo }) {
             Apoyamos a comunidades y negocios locales, conectándolos con viajeros 
             que buscan explorar bosques, volcanes y lagos con un enfoque sustentable.
           </p>
-          <a href="#rutas" className="btn btn-primary btn-icon">
+          <Link to="/rutas" className="btn btn-primary btn-icon">
             <i className="fa-solid fa-compass"></i> Explorar Ecorutas
-          </a>
+          </Link>
         </article>
 
         {/* El Buscador va aquí dentro según el contrato */}
