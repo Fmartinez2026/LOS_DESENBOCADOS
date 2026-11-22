@@ -2,15 +2,84 @@
   "rutas": [
     {
       "id": 1,
+      "nombre": "Sendero Lago Conguillío",
+      "imagen": "img/sendero-lago-conguillio.jpg",
+      "alt": "Sendero rodeado de bosque nativo junto a un lago",
+      "distanciaKm": 3.2,
+      "dificultad": "baja",
+      "accesible": true
+    },
+    {
+      "id": 2,
+      "nombre": "Salto del Indio",
+      "imagen": "img/salto-del-indio.jpg",
+      "alt": "Cascada entre árboles de un bosque templado",
+      "distanciaKm": 5.8,
+      "dificultad": "media",
+      "accesible": false
+    },
+    {
+      "id": 3,
+      "nombre": "Parque Nacional Huerquehue",
+      "imagen": "img/parque-huerquehue.jpg",
+      "alt": "Bosque y montañas del sur de Chile",
+      "distanciaKm": 9.5,
+      "dificultad": "alta",
+      "accesible": false
+    },
+    {
+      "id": 4,
+      "nombre": "Mirador Sierra Nevada",
+      "imagen": "img/mirador-sierra-nevada.jpg",
+      "alt": "Cumbre montañosa visible desde un sendero",
+      "distanciaKm": 6.4,
+      "dificultad": "media",
+      "accesible": false
+    },
+    {
+      "id": 5,
       "nombre": "Cerro Ñielol",
-      "imagen": "/src/assets/react.svg",
-      "alt": "Imagen de prueba",
+      "imagen": "img/cerro-nielol.jpg",
+      "alt": "Imagen referencial de un sendero natural",
       "distanciaKm": 4,
       "dificultad": "baja",
       "accesible": true
     }
   ],
-  "emprendimientos": [],
+  "emprendimientos": [
+    {
+      "id": 1,
+      "nombre": "Cocina Ruka Kimün",
+      "categoria": "Gastronomía",
+      "descripcion": "Sabores mapuche preparados con ingredientes locales y de temporada.",
+      "ubicacion": "Curarrehue, Región de La Araucanía",
+      "imagen": "img/cocina-ruka-kimun.jpg"
+    },
+    {
+      "id": 2,
+      "nombre": "Artesanía Newen",
+      "categoria": "Artesanía",
+      "descripcion": "Textiles y piezas hechas a mano que rescatan técnicas tradicionales.",
+      "ubicacion": "Pucón, Región de La Araucanía",
+      "imagen": "img/artesania-newen.jpg"
+    },
+    {
+      "id": 3,
+      "nombre": "Cabalgatas Huella Andina",
+      "categoria": "Turismo aventura",
+      "descripcion": "Recorridos guiados a caballo por bosques y paisajes cordilleranos.",
+      "ubicacion": "Melipeuco, Región de La Araucanía",
+      "imagen": "img/cabalgatas-huella-andina.jpg"
+    },
+    {
+      "id": 4,
+      "nombre": "Alojamiento Pewma",
+      "categoria": "Alojamiento",
+      "descripcion": "Cabañas familiares con vista al bosque y prácticas de bajo impacto.",
+      "ubicacion": "Curacautín, Región de La Araucanía",
+      "imagen": "img/alojamiento-pewma.jpg"
+    }
+  ],
   "resenas": [
     {
       "id": 1,
