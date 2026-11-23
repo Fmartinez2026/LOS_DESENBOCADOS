@@ -58,7 +58,7 @@
     {
       "id": 2,
       "nombre": "Artesanía Newen",
-      "categoria": "Artesanía",
+      "categoria": "artesania",
       "descripcion": "Textiles y piezas hechas a mano que rescatan técnicas tradicionales.",
       "ubicacion": "Pucón, Región de La Araucanía",
       "imagen": "img/artesania-newen.jpg"
