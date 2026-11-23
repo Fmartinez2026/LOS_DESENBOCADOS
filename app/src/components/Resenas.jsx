@@ -1,3 +1,4 @@
+import FormularioResena from "./FormularioResena.jsx";
 import { useEffect, useState } from "react";
 import { API_URL } from "../api.js";
 
@@ -73,6 +74,11 @@ export default function Resenas({ rutaId }) {
   return (
     <section className="resenas" aria-label="Reseñas de la ruta">
       <h2>Reseñas de visitantes</h2>
+
+      <FormularioResena
+        rutaId={rutaId}
+        onCreada={() => setActualizacion((valor) => valor + 1)}
+      />
 
       {cargando ? (
         <p className="estado" role="status">
