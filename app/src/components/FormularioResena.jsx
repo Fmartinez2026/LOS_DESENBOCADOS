@@ -47,7 +47,7 @@ export default function FormularioResena({ rutaId, onCreada }) {
   }
 
   return (
-    <form onSubmit={enviar}>
+    <form className="formulario-resena" onSubmit={enviar}>
       <label htmlFor="calificacion">Calificación (1 a 5)</label>
       <input
         id="calificacion"

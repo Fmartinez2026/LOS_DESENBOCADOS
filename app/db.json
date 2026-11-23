@@ -94,6 +94,13 @@
       "calificacion": 4,
       "comentario": "El recorrido estuvo bien señalizado.",
       "fecha": "2026-11-18"
+    },
+    {
+      "rutaId": 1,
+      "calificacion": 5,
+      "comentario": "esta todo muy bueno",
+      "fecha": "2026-11-23",
+      "id": 3
     }
   ]
-}
+}       
