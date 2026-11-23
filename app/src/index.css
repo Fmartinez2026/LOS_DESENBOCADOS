@@ -46,6 +46,16 @@
         .nav-links a:hover { color: var(--text-main); }
         .nav-links a:hover::after { width: 100%; }
 
+        .nav-links a.activo {
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .nav-links a.activo::after {
+            width: 100%;
+        }
+
+
         .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.7rem 1.8rem; border-radius: 50px; font-size: 0.9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: all 0.3s; border: none; overflow: hidden; }
         .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 15px rgba(216, 92, 39, 0.3); }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(216, 92, 39, 0.5); background: var(--primary-hover); }
